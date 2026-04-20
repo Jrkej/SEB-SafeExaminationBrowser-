@@ -164,7 +164,7 @@ SEB utilizes `electron-builder` optimized predominantly for Linux Desktop archit
 ### Compilation & Build 
 ```bash
 # 1. Clone Source
-git clone https://github.com/iitroorkee/seb.git
+git clone https://github.com/Jrkej/SEB-SafeExaminationBrowser-.git
 cd seb
 
 # 2. Extract Dependencies 
@@ -239,11 +239,11 @@ This system guarantees profound trust in BYOD (Bring Your Own Device) environmen
   ### 👥 Group 13 Development Team
   | Name | Enrollment No. | Primary Role / Contribution | Contact Email |
   |------|---------------|-------------------------------|---------------|
-  | **Akshat Srivastava** | `24114010` | Lead Architecture & OS Hooks | `asrivastava@CS.iitr.ac.in` |
-  | **Shubham Singla** | `24114093` | Proxy & Network Isolation | `ssingla@CS.iitr.ac.in` |
-  | **Yash Jain** | `24114108` | Database Crypto & Hash-Chaining | `yjain@CS.iitr.ac.in` |
-  | **Pushkar Jain** | `24114071` | Video Compositing & Electron UI | `pjain@CS.iitr.ac.in` |
-  | **Aditya Yadav** | `24114007` | Process Monitor & Escalation Engine | `ayadav@CS.iitr.ac.in` |
-  | **Divyanshu Meena** | `24114034` | Policy Engine & Admin Dashboard | `dmeena@CS.iitr.ac.in` |
+  | **Akshat Srivastava** | `24114010` | Lead Architecture & OS Hooks | `akshat_s@cs.iitr.ac.in` |
+  | **Shubham Singla** | `24114093` | Proxy & Network Isolation | `shubham_s@cs.iitr.ac.in` |
+  | **Yash Jain** | `24114108` | Database Crypto & Hash-Chaining | `yash_j2@cs.iitr.ac.in` |
+  | **Pushkar Jain** | `24114071` | Video Compositing & Electron UI | `pushkar_j@cs.iitr.ac.in` |
+  | **Aditya Yadav** | `24114007` | Process Monitor & Escalation Engine | `aditya_y@cs.iitr.ac.in` |
+  | **Divyanshu Meena** | `24114034` | Policy Engine & Admin Dashboard | `divyanshu_m@cs.iitr.ac.in` |
 
 </div>
