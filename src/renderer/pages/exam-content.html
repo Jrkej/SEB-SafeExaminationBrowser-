@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Exam Content</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #0d0d1a;
+            color: #e8e8f0;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #a29bfe;
+        }
+
+        .exam-meta {
+            color: #8888aa;
+            font-size: 13px;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .question {
+            background: #141432;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            font-size: 12px;
+            font-weight: 700;
+            color: #6c5ce7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .options {
+            list-style: none;
+        }
+
+        .options li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            background: #0e0e24;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .options li:hover {
+            background: #1e1e50;
+            border-color: rgba(108, 92, 231, 0.3);
+        }
+
+        .options li.selected {
+            background: rgba(108, 92, 231, 0.15);
+            border-color: #6c5ce7;
+        }
+
+        .options input[type="radio"] {
+            accent-color: #6c5ce7;
+            width: 16px;
+            height: 16px;
+        }
+
+        .options label {
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            background: #0e0e24;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            padding: 14px;
+            color: #e8e8f0;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #6c5ce7;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        .nav-panel {
+            position: sticky;
+            bottom: 0;
+            background: #101028;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 32px;
+            border-radius: 12px;
+        }
+
+        .nav-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: #141432;
+            color: #8888aa;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #1e1e50;
+            color: #e8e8f0;
+        }
+
+        .nav-btn.answered {
+            background: rgba(46, 213, 115, 0.15);
+            border-color: rgba(46, 213, 115, 0.3);
+            color: #2ed573;
+        }
+
+        .nav-btn.current {
+            background: #6c5ce7;
+            border-color: #6c5ce7;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Software Engineering Mid-Term Examination</h1>
+    <div class="exam-meta">CSC-206 | IIT Roorkee | April 2026 | 30 Questions | 60 Minutes</div>
+
+    <div class="question" id="q1">
+        <div class="question-number">Question 1 of 30</div>
+        <div class="question-text">Which software development model is best suited for projects where requirements are
+            expected to change frequently?</div>
+        <ul class="options">
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q1" value="a"> <label>a) Waterfall Model</label>
+            </li>
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q1" value="b"> <label>b) Spiral Model</label>
+            </li>
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q1" value="c"> <label>c) Agile Model</label>
+            </li>
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q1" value="d"> <label>d) V-Model</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="question" id="q2">
+        <div class="question-number">Question 2 of 30</div>
+        <div class="question-text">What is the primary purpose of a feasibility study in software engineering?</div>
+        <ul class="options">
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q2" value="a"> <label>a) To write the source code</label>
+            </li>
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q2" value="b"> <label>b) To determine if the project is viable</label>
+            </li>
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q2" value="c"> <label>c) To test the final product</label>
+            </li>
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q2" value="d"> <label>d) To deploy the application</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="question" id="q3">
+        <div class="question-number">Question 3 of 30</div>
+        <div class="question-text">Explain the concept of "layered security architecture" and why it is important for
+            secure examination systems. Provide at least two examples.</div>
+        <textarea placeholder="Type your answer here..."></textarea>
+    </div>
+
+    <div class="question" id="q4">
+        <div class="question-number">Question 4 of 30</div>
+        <div class="question-text">In the context of the Safe Examination Browser (SEB), what is the role of a Policy
+            Engine?</div>
+        <ul class="options">
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q4" value="a"> <label>a) To render the browser UI</label>
+            </li>
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q4" value="b"> <label>b) To load and apply JSON-defined security rules at
+                    runtime</label>
+            </li>
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q4" value="c"> <label>c) To manage the database</label>
+            </li>
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q4" value="d"> <label>d) To compile the application</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="question" id="q5">
+        <div class="question-number">Question 5 of 30</div>
+        <div class="question-text">Which of the following is NOT a valid non-functional requirement?</div>
+        <ul class="options">
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q5" value="a"> <label>a) The system shall handle 1000 concurrent users</label>
+            </li>
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q5" value="b"> <label>b) The system shall display a login page</label>
+            </li>
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q5" value="c"> <label>c) The system shall respond within 2 seconds</label>
+            </li>
+            <li onclick="this.querySelector('input').checked=true; selectOption(this)">
+                <input type="radio" name="q5" value="d"> <label>d) The system shall encrypt all data at rest</label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Question Navigation Panel -->
+    <div class="nav-panel">
+        <button class="nav-btn current" onclick="scrollToQ(1)">1</button>
+        <button class="nav-btn" onclick="scrollToQ(2)">2</button>
+        <button class="nav-btn" onclick="scrollToQ(3)">3</button>
+        <button class="nav-btn" onclick="scrollToQ(4)">4</button>
+        <button class="nav-btn" onclick="scrollToQ(5)">5</button>
+        <button class="nav-btn" onclick="scrollToQ(6)">6</button>
+        <button class="nav-btn" onclick="scrollToQ(7)">7</button>
+        <button class="nav-btn" onclick="scrollToQ(8)">8</button>
+        <button class="nav-btn" onclick="scrollToQ(9)">9</button>
+        <button class="nav-btn" onclick="scrollToQ(10)">10</button>
+    </div>
+
+    <script>
+        function selectOption(li) {
+            li.closest('.options').querySelectorAll('li').forEach(l => l.classList.remove('selected'));
+            li.classList.add('selected');
+        }
+        function scrollToQ(n) {
+            const el = document.getElementById('q' + n);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+
+</html>

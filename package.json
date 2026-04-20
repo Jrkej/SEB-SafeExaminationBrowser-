@@ -1,0 +1,63 @@
+{
+  "name": "seb",
+  "version": "1.0.0",
+  "description": "Safe Examination Browser — Secure Chromium-based exam environment with full proctoring",
+  "homepage": "https://github.com/iitroorkee/seb",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron . --no-sandbox",
+    "start:secure": "sudo --preserve-env=DISPLAY,XAUTHORITY,WAYLAND_DISPLAY env PATH=$PATH ./node_modules/.bin/electron . --no-sandbox",
+    "build": "npx electron-builder --linux",
+    "build:win": "npx electron-builder --win",
+    "build:all": "npx electron-builder --linux --win",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "build": {
+    "appId": "com.iitroorkee.seb",
+    "productName": "SafeExaminationBrowser",
+    "directories": {
+      "output": "dist"
+    },
+    "asarUnpack": [
+      "scripts/**",
+      "config/**"
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Education"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "src/assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "src/assets/icon.png",
+      "uninstallerIcon": "src/assets/icon.png"
+    }
+  },
+  "keywords": [
+    "exam",
+    "browser",
+    "proctoring",
+    "security",
+    "electron"
+  ],
+  "author": "Group 13 <admin@iitroorkee.example.com>",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^41.2.1",
+    "electron-builder": "^26.8.1"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.9.0"
+  }
+}

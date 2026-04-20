@@ -1,0 +1,137 @@
+{
+    "examMode": true,
+    "allowedDomains": [
+        "exam.university.edu",
+        "*.university.edu",
+        "*.iitb.ac.in",
+        "*.iitd.ac.in",
+        "*.iitm.ac.in",
+        "*.iitk.ac.in",
+        "*.iitkgp.ac.in",
+        "*.iitr.ac.in",
+        "*.iitg.ac.in",
+        "*.iit*.ac.in",
+        "codeforces.com",
+        "*.codeforces.com",
+        "codeforces.org",
+        "*.codeforces.org",
+        "codechef.com",
+        "*.codechef.com",
+        "www.google.com",
+        "*.google.com",
+        "*.googleapis.com",
+        "*.gstatic.com",
+        "*.recaptcha.net",
+        "recaptcha.net",
+        "*.google-analytics.com",
+        "*.googletagmanager.com",
+        "fonts.googleapis.com",
+        "fonts.gstatic.com",
+        "ajax.googleapis.com",
+        "mathjax.org",
+        "*.mathjax.org",
+        "cdnjs.cloudflare.com",
+        "*.cloudflare.com",
+        "challenges.cloudflare.com",
+        "cdn.jsdelivr.net",
+        "code.jquery.com",
+        "unpkg.com",
+        "*.gravatar.com"
+    ],
+    "disabledFeatures": {
+        "devTools": true,
+        "rightClick": true,
+        "clipboardAccess": true,
+        "externalLinks": true,
+        "dragDrop": true,
+        "printScreen": true,
+        "textSelection": false
+    },
+    "monitoring": {
+        "maxBlurEvents": 3,
+        "alertOnShortcutAttempt": true,
+        "processCheckIntervalMs": 3000,
+        "clipboardClearIntervalMs": 5000,
+        "focusRestoreDelayMs": 100,
+        "maxShortcutAttempts": 10,
+        "escalationThresholds": {
+            "warning": 2,
+            "alert": 5,
+            "terminate": 10
+        }
+    },
+    "forbiddenProcesses": [
+        "obs",
+        "obs-studio",
+        "ffmpeg",
+        "vlc",
+        "simplescreenrecorder",
+        "kazam",
+        "recordmydesktop",
+        "peek",
+        "vokoscreen",
+        "screencapture",
+        "discord",
+        "telegram-desktop",
+        "whatsapp-for-linux",
+        "zoom",
+        "teams-for-linux",
+        "skypeforlinux",
+        "signal-desktop",
+        "wire-desktop",
+        "anydesk",
+        "teamviewer",
+        "vncviewer",
+        "remmina",
+        "xrdp",
+        "rdesktop",
+        "virtualbox",
+        "vmware",
+        "qemu-system",
+        "gnome-boxes",
+        "cheese",
+        "guvcview",
+        "chatgpt",
+        "claude",
+        "copilot",
+        "lmstudio",
+        "ollama"
+    ],
+    "proxy": {
+        "port": 18080,
+        "enabled": true,
+        "blockPageTitle": "Access Blocked — SEB",
+        "blockPageMessage": "This website is not allowed during the examination."
+    },
+    "logging": {
+        "directory": "logs",
+        "flushIntervalMs": 10000,
+        "hashChain": true,
+        "maxBufferSize": 100
+    },
+    "auth": {
+        "mode": "local",
+        "users": [
+            {
+                "id": "student1",
+                "password": "exam2026",
+                "role": "student",
+                "name": "Test Student"
+            },
+            {
+                "id": "admin1",
+                "password": "admin2026",
+                "role": "admin",
+                "name": "Test Admin"
+            }
+        ]
+    },
+    "exam": {
+        "autoSubmitOnTimeout": true,
+        "warningBeforeEndMinutes": [
+            5,
+            1
+        ],
+        "showQuestionNavigation": true
+    }
+}

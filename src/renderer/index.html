@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEB — Safe Examination Browser</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Custom Title Bar -->
+    <div id="titlebar">
+        <div id="titlebar-drag">
+            <span id="app-title">🛡️ SEB</span>
+            <span id="session-indicator" class="hidden">
+                <span class="pulse-dot"></span>
+                <span id="session-status-text">Exam Active</span>
+            </span>
+        </div>
+        <div id="window-controls">
+            <button id="btn-close" class="win-ctrl win-close" title="Close">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Area (pages loaded dynamically) -->
+    <div id="app-container">
+        <!-- LOGIN PAGE -->
+        <div id="page-login" class="page active">
+            <div class="login-wrapper">
+                <div class="login-card">
+                    <div class="login-header">
+                        <div class="login-logo">🛡️</div>
+                        <h1>Safe Examination Browser</h1>
+                        <p class="login-subtitle">Secure login to your examination portal</p>
+                    </div>
+                    <form id="login-form" autocomplete="off">
+                        <div class="form-group">
+                            <label for="login-id">Student / Admin ID</label>
+                            <input type="text" id="login-id" placeholder="Enter your ID" required autocomplete="off"
+                                spellcheck="false">
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" placeholder="Enter your password" required
+                                autocomplete="off">
+                        </div>
+                        <div id="login-error" class="error-message hidden"></div>
+                        <button type="submit" id="login-btn" class="btn-primary">
+                            <span>Sign In</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </form>
+                    <div class="login-footer">
+                        <div class="security-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor"
+                                    stroke-width="2" />
+                            </svg>
+                            <span>All activity is monitored and logged</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXAM LIST PAGE -->
+        <div id="page-exam-list" class="page">
+            <div class="exam-list-wrapper">
+                <div class="exam-list-header">
+                    <h1>Welcome, <span id="student-name">Student</span></h1>
+                    <p>Your assigned examinations</p>
+                    <div class="header-actions">
+                        <button id="btn-logout" class="btn-secondary">Sign Out</button>
+                    </div>
+                </div>
+                <div id="exam-cards-container">
+                    <!-- Exam cards will be injected -->
+                </div>
+
+                <div class="custom-exam-section"
+                    style="margin-top: 40px; padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);">
+                    <h2 style="font-size: 16px; margin-bottom: 12px;">Start Secure Exam from URL</h2>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Paste the URL for
+                        your Codeforces, CodeChef, or external test portal.</p>
+                    <div style="display: flex; gap: 12px;">
+                        <input type="url" id="external-url-input" placeholder="https://codeforces.com/contest/..."
+                            style="flex: 1; height: 42px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0 16px; color: var(--text-primary); outline: none;">
+                        <input type="number" id="external-url-duration" placeholder="Min" value="120"
+                            style="width: 80px; height: 42px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0 16px; color: var(--text-primary); outline: none;">
+                        <button id="btn-load-external" class="btn-primary"
+                            style="width: auto; padding: 0 24px; height: 42px;">Launch Securely</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXAM PAGE (with webview) -->
+        <div id="page-exam" class="page">
+            <div id="exam-topbar">
+                <div id="exam-info">
+                    <!-- Browser Controls -->
+                    <div style="display: flex; gap: 8px; flex: 1; align-items: center; margin-right: 20px;">
+                        <button id="btn-browser-back" class="btn-secondary"
+                            style="width: 36px; padding: 0; justify-content: center;">◀</button>
+                        <button id="btn-browser-forward" class="btn-secondary"
+                            style="width: 36px; padding: 0; justify-content: center;">▶</button>
+                        <button id="btn-browser-reload" class="btn-secondary"
+                            style="width: 36px; padding: 0; justify-content: center;">↻</button>
+                        <input type="url" id="browser-url-bar" value="https://google.com"
+                            style="flex: 1; height: 36px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0 16px; color: var(--text-primary); outline: none;">
+                        <button id="btn-browser-go" class="btn-primary"
+                            style="width: auto; padding: 0 16px; height: 36px;">Go</button>
+                    </div>
+
+                    <!-- NEW: Exam Recording + Timer Display (Initially Hidden) -->
+                    <div id="exam-recording-status"
+                        style="display: none; align-items: center; gap: 12px; margin-right: 20px; font-family: monospace; font-size: 14px; background: rgba(0,0,0,0.5); padding: 4px 12px; border-radius: 4px; border: 1px solid var(--border);">
+                        <span id="exam-top-timestamp" style="color: #4CAF50;">--:--:--</span>
+                        <span id="exam-top-timer" style="color: var(--accent); font-weight: bold;">--m --s</span>
+                        <span style="display: flex; align-items: center; gap: 4px; color: #f44336; font-weight: bold;">
+                            <div
+                                style="width: 8px; height: 8px; background: #f44336; border-radius: 50%; box-shadow: 0 0 8px #f44336; animation: pulse 1s infinite alternate;">
+                            </div> REC
+                        </span>
+                    </div>
+
+                    <!-- NEW: Explicit Start Button -> Starts Timer and Recording! -->
+                    <button id="btn-start-loaded-exam" class="btn-success"
+                        style="display: none; margin-right: 12px; background: #4CAF50;">Start Exam</button>
+
+                    <button id="btn-end-session" class="btn-danger">End Session</button>
+                </div>
+            </div>
+
+            <div id="exam-webview-container">
+                <!-- Exam webview will be injected -->
+            </div>
+
+            <!-- WEBCAM CAPTURE CORNER -->
+            <div id="webcam-container"
+                style="position: fixed; bottom: 20px; right: 20px; width: 240px; height: 180px; border-radius: 8px; overflow: hidden; border: 2px solid var(--border); box-shadow: 0 8px 24px rgba(0,0,0,0.8); z-index: 1000; display: none;">
+                <video id="webcam-video" autoplay muted style="width: 100%; height: 100%; object-fit: cover;"></video>
+                <div
+                    style="position: absolute; top: 8px; right: 8px; background: rgba(255,0,0,0.8); color: white; border-radius: 4px; padding: 2px 6px; font-size: 10px; font-weight: bold; animation: pulse 2s infinite;">
+                    REC</div>
+            </div>
+
+            <!-- SUBMISSION CONFIRMATION MODAL -->
+            <div id="submit-modal" class="modal hidden">
+                <div class="modal-overlay"></div>
+                <div class="modal-content">
+                    <h2>⚠️ Submit Examination?</h2>
+                    <p>Are you sure you want to submit? This action cannot be undone.</p>
+                    <div id="submit-summary">
+                        <!-- Summary stats injected here -->
+                    </div>
+                    <div class="modal-actions">
+                        <button id="btn-cancel-submit" class="btn-secondary">Cancel</button>
+                        <button id="btn-confirm-submit" class="btn-danger">Confirm Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMIN DASHBOARD -->
+        <div id="page-admin" class="page">
+            <div class="admin-wrapper">
+                <div class="admin-header">
+                    <h1>🛡️ Admin Dashboard</h1>
+                    <div class="header-actions">
+                        <button id="btn-admin-logout" class="btn-secondary">Sign Out</button>
+                    </div>
+                </div>
+                <div class="admin-grid">
+
+                    <!-- User Management Panel -->
+                    <div class="admin-card" id="admin-users">
+                        <h2>👥 User Management</h2>
+                        <div id="users-list" style="max-height: 200px; overflow-y: auto; margin-bottom: 12px;">
+                            <!-- User rows injected here -->
+                        </div>
+                        <div style="border-top: 1px solid var(--border); padding-top: 12px;">
+                            <h3 style="font-size: 13px; margin-bottom: 8px;">Add New User</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                                <input type="text" id="new-user-username" placeholder="Username"
+                                    style="height: 36px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0 12px; color: var(--text-primary); outline: none;">
+                                <input type="password" id="new-user-password" placeholder="Password"
+                                    style="height: 36px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0 12px; color: var(--text-primary); outline: none;">
+                                <input type="text" id="new-user-name" placeholder="Full Name"
+                                    style="height: 36px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0 12px; color: var(--text-primary); outline: none;">
+                                <select id="new-user-role"
+                                    style="height: 36px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0 12px; color: var(--text-primary); outline: none;">
+                                    <option value="student">Student</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                            <button id="btn-create-user" class="btn-primary" style="width: 100%; height: 36px;">Create
+                                User</button>
+                            <div id="user-create-msg" style="margin-top: 6px; font-size: 12px; color: var(--accent);">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monitoring Panel -->
+                    <div class="admin-card" id="admin-monitoring">
+                        <h2>📊 Session Monitor</h2>
+                        <div id="monitoring-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Escalation Level</span>
+                                <span class="stat-value" id="stat-escalation">NORMAL</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Total Violations</span>
+                                <span class="stat-value" id="stat-violations">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Focus Loss Events</span>
+                                <span class="stat-value" id="stat-blur">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Shortcut Attempts</span>
+                                <span class="stat-value" id="stat-shortcuts">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Blocked URLs</span>
+                                <span class="stat-value" id="stat-blocked-urls">0</span>
+                            </div>
+                        </div>
+                        <button id="btn-refresh-stats" class="btn-secondary">Refresh</button>
+                    </div>
+
+                    <!-- Per-User Encrypted Log Viewer -->
+                    <div class="admin-card" id="admin-logs" style="grid-column: 1 / -1;">
+                        <h2>📋 Encrypted User Logs (AES-256-GCM)</h2>
+                        <div style="display: flex; gap: 12px; margin-bottom: 12px; align-items: center;">
+                            <select id="log-user-select"
+                                style="flex: 1; height: 36px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0 12px; color: var(--text-primary); outline: none;">
+                                <option value="all">— All Users —</option>
+                            </select>
+                            <button id="btn-load-logs" class="btn-secondary">Load Logs</button>
+                            <button id="btn-verify-integrity" class="btn-secondary">Verify Hash Chain</button>
+                        </div>
+                        <div id="integrity-result" style="margin-bottom: 8px; font-size: 12px;"></div>
+                        <div id="log-viewer">
+                            <div id="log-entries">
+                                <!-- Log entries injected here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Policy Editor Panel -->
+                    <div class="admin-card" id="admin-policy" style="grid-column: 1 / -1;">
+                        <h2>⚙️ Policy Editor (Encrypted in DB)</h2>
+                        <textarea id="policy-editor"
+                            style="width: 100%; height: 280px; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; color: var(--text-primary); font-family: monospace; font-size: 12px; outline: none; resize: vertical; tab-size: 2;"
+                            spellcheck="false"></textarea>
+                        <div style="display: flex; gap: 12px; margin-top: 8px; align-items: center;">
+                            <button id="btn-save-policy" class="btn-primary" style="height: 36px; padding: 0 24px;">💾
+                                Save Policy to DB</button>
+                            <button id="btn-reset-policy" class="btn-secondary" style="height: 36px; padding: 0 24px;">↻
+                                Reset to File</button>
+                            <span id="policy-save-msg" style="font-size: 12px; margin-left: 8px;"></span>
+                        </div>
+                        <div style="margin-top: 16px; border-top: 1px solid var(--border); padding-top: 12px;">
+                            <h3 style="font-size: 13px; margin-bottom: 8px;">📜 Change History</h3>
+                            <div id="policy-history"
+                                style="max-height: 120px; overflow-y: auto; font-size: 12px; color: var(--text-secondary);">
+                                <!-- History rows injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security enforcement (must load first) -->
+        <script src="lockdown.js"></script>
+        <!-- App logic -->
+        <script src="renderer.js"></script>
+</body>
+
+</html>
